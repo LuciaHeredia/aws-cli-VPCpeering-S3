@@ -7,9 +7,11 @@ This is a guide for creating a **VPC Peering**, launching **EC2 Instances** and 
 
 ## Script Steps:
 1. Create a new **VPC**.
-2. TODO: Establish **VPC Peering**:
-    - Create a VPC peering connection between the default VPC and the new VPC.
-    - Ensure the peering connection status is active.
+2. Establish **VPC Peering**:
+    - Place your *default **VPC** ID* in your *config.conf* file. \
+    ``` VPC_ID_DEFAULT="vpc-xxxxxxxx" ```
+    - Create a **VPC peering** connection between the *default **VPC*** and the *new **VPC***.
+    - Ensure the peering connection status is *active*.
 3. TODO: Launch **EC2 Instances**:
     -   Create a private subnet within the new VPC for the first EC2 instance.
     -   Create a public subnet within the new VPC for the second EC2 instance.
