@@ -11,15 +11,17 @@ give it permission to execute:  ``` $ chmod +x example-script.sh ```
 
 > The *destoy-script* is meant for deleting all that we created, with the help of a *.conf* file that stores all temporary variables (ID, ARN).
 
-1. Create a new **VPC**.
+1. Create a new **VPC**:
+    - Make sure *CIDR block* isn't overlapping with *default **VPC**'s CIDR block*.
+    - Create a **private subnet** and a **public subnet** within the *new **VPC***.
+    - Create a **route table** for the *new **VPC*** and associate the **subnets** to it.
 2. Establish **VPC Peering**:
-    - Place your *default **VPC** ID* in your *config.conf* file. \
+    - Place your *default **VPC** ID* in your *config.conf* file: \
     ``` VPC_ID_DEFAULT="vpc-xxxxxxxx" ```
     - Create a **VPC peering** connection between the *default **VPC*** and the *new **VPC***.
-    - Ensure the peering connection status is *active*.
+    - Update **route tables** in each **VPC**.
+    - Ensure the **VPC peering** connection status is *active*.
 3. TODO: Launch **EC2 Instances**:
-    -   Create a **private subnet** within the *new **VPC*** for the first **EC2 instance**.
-    -   Create a **public subnet** within the *new **VPC*** for the second **EC2 instance**.
     -   Launch an **EC2 instance** in the **private subnet**.
     -   Launch another **EC2 instance** in the **public subnet**.
     -   *SSH* from the *public **EC2 instance** to the *private **EC2 instance*** using the *public IP* or *DNS*.
