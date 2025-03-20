@@ -33,3 +33,5 @@ give it permission to execute:  ``` $ chmod +x example-script.sh ```
     > Don’t create a nat gateway, the private subnet should only reach s3.
 6. TODO: Upload File to **S3**:
     -   From the EC2 instance in the private subnet, use the AWS CLI to attempt to upload a file to the S3 bucket.
+
+
