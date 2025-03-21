@@ -46,28 +46,32 @@ while true; do
     ((COUNTER_SLEEP-=1))
 done
 #######
-# Get the route tables for both VPCs
-NEW_VPC_ROUTE_TABLE_ID=$(aws ec2 describe-route-tables \
-        --filters Name=vpc-id,Values=$NEW_VPC_ID \
-        --region $REGION \
-        --query 'RouteTables[0].RouteTableId' --output text)
+# Get route table of default VPC
 DEFAULT_VPC_ROUTE_TABLE_ID=$(aws ec2 describe-route-tables \
         --filters Name=vpc-id,Values=$DEFAULT_VPC_ID \
         --region $REGION \
         --query 'RouteTables[0].RouteTableId' --output text)
 #######
-echo "Adding routes for communication between VPCs..."
-aws ec2 create-route \
-        --route-table-id $NEW_VPC_ROUTE_TABLE_ID \
-        --destination-cidr-block $DEFAULT_VPC_CIDR_BLOCK \
-        --vpc-peering-connection-id $VPC_PEER_CON_ID \
-        --region $REGION
-echo "--> Added route to New VPC Route Table: $NEW_VPC_ROUTE_TABLE_ID"
+echo "Adding peering routes for communication..."
 aws ec2 create-route \
         --route-table-id $DEFAULT_VPC_ROUTE_TABLE_ID \
         --destination-cidr-block $NEW_VPC_CIDR_BLOCK \
         --vpc-peering-connection-id $VPC_PEER_CON_ID \
         --region $REGION
 echo "--> Added route to Default VPC Route Table: $DEFAULT_VPC_ROUTE_TABLE_ID"
+
+aws ec2 create-route \
+        --route-table-id $PUBLIC_ROUTE_TABLE_ID \
+        --destination-cidr-block $DEFAULT_VPC_CIDR_BLOCK \
+        --vpc-peering-connection-id $VPC_PEER_CON_ID \
+        --region $REGION
+echo "--> Added route in Public Route Table for peering."
+
+aws ec2 create-route \
+        --route-table-id $PRIVATE_ROUTE_TABLE_ID \
+        --destination-cidr-block $DEFAULT_VPC_CIDR_BLOCK \
+        --vpc-peering-connection-id $VPC_PEER_CON_ID \
+        --region $REGION
+echo "--> Added route in Private Route Table for peering."
 #######
 echo "--> VPC Peering setup complete!"

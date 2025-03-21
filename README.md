@@ -28,24 +28,31 @@ give permission to all files to execute:  ``` $ chmod +x scripts/execute_all.sh 
 
 1. Create a new **VPC**:
     - Make sure *CIDR block* isn't overlapping with *default **VPC**'s CIDR block*.
-2. Establish **VPC Peering**:
+    - Enable *DNS hostname* support (for **public subnet**).
+2. Create an **Internet Gateway**:
+    - Create an **Internet Gateway** (for **public subnet**) and attach it to the new **VPC**.
+3. Create 2 **Subnets**:
+    - Create a **public subnet** and a **private subnet**.
+    - Create 2 **route tables**:
+        - **Public subnet** → **Internet Gateway** (for internet access).
+        - **Private subnet** → No direct internet access.
+    > Don’t create a **nat gateway**, the **private subnet** should only reach **s3**.
+4. Establish **VPC Peering**:
     - Place your *default **VPC** ID* in your *config.conf* file: \
     ``` DEFAULT_VPC_ID="vpc-xxxxxxxx" ```
     - Create a **VPC peering** connection between the *default **VPC*** and the *new **VPC***.
     - Ensure the **VPC peering** connection status is *active*.
-    - Update **route tables** of each **VPC**.
-3. TODO: Create **Subnets**:
-    - Create a **private subnet** and a **public subnet** within the *new **VPC***.
-4. TODO: Launch **EC2 Instances**:
+    - Update **route tables** of each **subnet** and default **VPC**.
+5. Launch **EC2 Instances**:
+    -   Create a **Security Group** that allows internal traffic (from the **public subnet**).
     -   Launch an **EC2 instance** in the **private subnet**.
     -   Launch another **EC2 instance** in the **public subnet**.
-    -   *SSH* from the *public **EC2 instance** to the *private **EC2 instance*** using the *public IP* or *DNS*.
+    -   Try to *SSH* from the public **EC2 instance** to the private **EC2 instance** using the *public IP* or *DNS*.
 5. TODO: Create an **S3 Bucket**:
     -   Create an **S3 bucket**.
 6. TODO: **VPC Endpoint** for **S3**:
     -   Create a VPC endpoint for S3 in the private subnet.
     -   Update the route tables for the private subnet to route S3 traffic through the VPC endpoint.
-    > Don’t create a nat gateway, the private subnet should only reach s3.
 7. TODO: Upload File to **S3**:
     -   From the EC2 instance in the private subnet, use the AWS CLI to attempt to upload a file to the S3 bucket.
 
