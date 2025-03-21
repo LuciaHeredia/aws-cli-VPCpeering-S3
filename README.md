@@ -22,20 +22,18 @@ aws-cli-VPCpeering-S3/
 
 ## Script Steps:
 > Before running the main script:  ``` $ ./scripts/main.sh ``` , \
-give permission to all files to execute:  ``` $ chmod +x scripts/execute-all.sh ```
+give permission to all files to execute:  ``` $ chmod +x scripts/execute_all.sh ```
 
-> The *scripts/destoy-all.sh* is meant for deleting all that we created, with the help of a *.conf* file that stores all temporary variables (ID, ARN).
+> The *scripts/destoy_all.sh* is meant for deleting all that we created, with the help of a *.conf* file that stores all temporary variables (ID, ARN).
 
 1. Create a new **VPC**:
     - Make sure *CIDR block* isn't overlapping with *default **VPC**'s CIDR block*.
-
-
 2. Establish **VPC Peering**:
     - Place your *default **VPC** ID* in your *config.conf* file: \
     ``` DEFAULT_VPC_ID="vpc-xxxxxxxx" ```
     - Create a **VPC peering** connection between the *default **VPC*** and the *new **VPC***.
-    - Update **route tables** of each **VPC**.
     - Ensure the **VPC peering** connection status is *active*.
+    - Update **route tables** of each **VPC**.
 3. TODO: Create **Subnets**:
     - Create a **private subnet** and a **public subnet** within the *new **VPC***.
 4. TODO: Launch **EC2 Instances**:
