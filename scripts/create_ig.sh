@@ -17,5 +17,5 @@ aws ec2 attach-internet-gateway \
     --vpc-id $NEW_VPC_ID --region $REGION \
     --internet-gateway-id $IGW_ID
 
-echo "IGW_ID=$IGW_ID" > $TEMP_VARS
+echo "IGW_ID=$IGW_ID" >> $TEMP_VARS
 echo "--> Created and attached Internet Gateway: $IGW_ID"

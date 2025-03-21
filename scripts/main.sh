@@ -17,10 +17,11 @@ fi
 if ! grep -q "VPC_PEER_CON_ID" "$TEMP_VARS"; then
     ./scripts/create_vpc_peering.sh
 fi
-######################## 5. EC2 Instances ########################
-# TODO: echo "Creating EC2 Instances..."
-##
-##
+######################## 5. Security Groups ########################
+./scripts/create_sg.sh
+######################## 6. EC2 Instances ########################
+./scripts/create_ec2.sh
+######################## 7. S3 Bucket ########################
 
 
 #######

@@ -43,17 +43,17 @@ give permission to all files to execute:  ``` $ chmod +x scripts/execute_all.sh 
     - Create a **VPC peering** connection between the *default **VPC*** and the *new **VPC***.
     - Ensure the **VPC peering** connection status is *active*.
     - Update **route tables** of each **subnet** and default **VPC**.
-5. Launch **EC2 Instances**:
-    -   Create a **Security Group** that allows internal traffic (from the **public subnet**).
-    -   Launch an **EC2 instance** in the **private subnet**.
-    -   Launch another **EC2 instance** in the **public subnet**.
-    -   Try to *SSH* from the public **EC2 instance** to the private **EC2 instance** using the *public IP* or *DNS*.
-5. TODO: Create an **S3 Bucket**:
-    -   Create an **S3 bucket**.
-6. TODO: **VPC Endpoint** for **S3**:
-    -   Create a VPC endpoint for S3 in the private subnet.
-    -   Update the route tables for the private subnet to route S3 traffic through the VPC endpoint.
-7. TODO: Upload File to **S3**:
-    -   From the EC2 instance in the private subnet, use the AWS CLI to attempt to upload a file to the S3 bucket.
-
-
+5. Creating **Security Groups**:
+    - Create a **Security Group** for public **EC2** that allows *SSH* from anywhere.
+    - Create a **Security Group** for private **EC2** that allows *SSH* only from the public **EC2**.
+6. Launch **EC2 Instances**:
+    - Launch an **EC2 instance** in the **public subnet** (acting as a **bastion host**).
+    - Launch another **EC2 instance** in the **private subnet** (no public IP).
+    - Try to *SSH* from the public **EC2 instance** to the private **EC2 instance** using the *public IP* or *DNS*.
+7. TODO: Create an **S3 Bucket**:
+    - Create an **S3 bucket**.
+8. TODO: **VPC Endpoint** for **S3**:
+    - Create a VPC endpoint for S3 in the private subnet.
+    - Update the route tables for the private subnet to route S3 traffic through the VPC endpoint.
+9. TODO: Upload File to **S3**:
+    - From the EC2 instance in the private subnet, use the AWS CLI to attempt to upload a file to the S3 bucket.
