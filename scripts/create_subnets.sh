@@ -1,6 +1,6 @@
 #!/bin/bash
 source config/config.conf # Private Variables file
-source "$TEMP_VARS" # Temporary Variables file
+source "$TEMP_VARS" # Temporary Variables file (IDs)
 
 echo "Creating Public Subnet..."
 PUBLIC_SUBNET_ID=$(aws ec2 create-subnet \

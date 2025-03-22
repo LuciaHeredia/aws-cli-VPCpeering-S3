@@ -1,6 +1,6 @@
 #!/bin/bash
 source config/config.conf # Private Variables file
-source "$TEMP_VARS" # Temporary Variables file
+source "$TEMP_VARS" # Temporary Variables file (IDs)
 
 echo "Launching Public EC2..."
 PUBLIC_INSTANCE_ID=$(aws ec2 run-instances \

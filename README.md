@@ -5,7 +5,7 @@ It includes other steps just for practice *or* as pre-requisites for the main st
 Each step has its own script in order to keep a well-organized folder structure for **modularity**, **easy debugging** and **maintainability**.
 
 ## AWS Architecture Diagram :
-<img src="z-README-pics/vpcpeer-s3.png" width="700"/> <br/>
+<img src="z-README-pics/vpcpeer-s3.png" width="900"/> <br/>
 
 ## Folders Structure:
 ```
@@ -43,7 +43,6 @@ give permission to all files to execute:  ``` $ chmod +x scripts/execute_all.sh 
     - Create 2 **route tables**:
         - **Public subnet** → **Internet Gateway** (for internet access).
         - **Private subnet** → No direct internet access.
-    > Don’t create a **nat gateway**, the **private subnet** should only reach **s3**.
 4. Establish **VPC Peering**:
     - Place your *default **VPC** ID* in your *config.conf* file: \
     ``` DEFAULT_VPC_ID="vpc-xxxxxxxx" ```
@@ -57,10 +56,10 @@ give permission to all files to execute:  ``` $ chmod +x scripts/execute_all.sh 
     - Launch an **EC2 instance** in the **public subnet** (acting as a **bastion host**).
     - Launch another **EC2 instance** in the **private subnet** (no public IP).
     - Try to *SSH* from the public **EC2 instance** to the private **EC2 instance** using the *public IP* or *DNS*.
-7. TODO: Create an **S3 Bucket**:
-    - Create an **S3 bucket**.
+7. Create an **S3 Bucket**.
 8. TODO: **VPC Endpoint** for **S3**:
     - Create a VPC endpoint for S3 in the private subnet.
     - Update the route tables for the private subnet to route S3 traffic through the VPC endpoint.
+    > Don’t create a **nat gateway**, the **private subnet** should only reach **s3**.
 9. TODO: Upload File to **S3**:
     - From the EC2 instance in the private subnet, use the AWS CLI to attempt to upload a file to the S3 bucket.

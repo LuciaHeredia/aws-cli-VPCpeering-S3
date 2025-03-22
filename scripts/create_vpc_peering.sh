@@ -1,6 +1,6 @@
 #!/bin/bash
 source config/config.conf # Private Variables file
-source "$TEMP_VARS" # Temporary Variables file
+source "$TEMP_VARS" # Temporary Variables file (IDs)
 
 echo "Creating VPC peering connection..."
 VPC_PEER_CON_ID=$(aws ec2 create-vpc-peering-connection \
