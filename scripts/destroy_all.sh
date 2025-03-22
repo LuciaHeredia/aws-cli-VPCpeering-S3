@@ -43,6 +43,11 @@ if grep -q "IGW_ID" "$TEMP_VARS"; then
     echo "Deleting Internet Gateway: $IGW_ID ..."
     aws ec2 delete-internet-gateway --internet-gateway-id $IGW_ID
 fi
+######################## Delete VPC endpoint ########################
+if grep -q "VPC_ENDPOINT_ID" "$TEMP_VARS"; then
+        echo "Deleting VPC endpoint: $VPC_ENDPOINT_ID ..."
+    aws ec2 delete-vpc-endpoints --vpc-endpoint-ids $VPC_ENDPOINT_ID
+fi
 ######################## Delete new VPC ########################
 if grep -q "NEW_VPC_ID" "$TEMP_VARS"; then
     echo "Deleting new VPC: $NEW_VPC_ID ..."

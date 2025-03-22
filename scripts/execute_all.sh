@@ -9,3 +9,4 @@ chmod +x scripts/create_ig.sh
 chmod +x scripts/create_sg.sh
 chmod +x scripts/create_ec2.sh
 chmod +x scripts/create_s3.sh
+chmod +x scripts/create_vpc_endpoint.sh
