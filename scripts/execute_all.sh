@@ -8,3 +8,4 @@ chmod +x scripts/create_subnets.sh
 chmod +x scripts/create_ig.sh
 chmod +x scripts/create_sg.sh
 chmod +x scripts/create_ec2.sh
+chmod +x scripts/create_s3.sh

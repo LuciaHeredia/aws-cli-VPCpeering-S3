@@ -22,7 +22,7 @@ fi
 ######################## 6. EC2 Instances ########################
 ./scripts/create_ec2.sh
 ######################## 7. S3 Bucket ########################
-
+./scripts/create_s3.sh
 
 #######
 echo "--> Deployment complete!"

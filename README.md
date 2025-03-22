@@ -14,10 +14,17 @@ aws-cli-VPCpeering-S3/
 |   ├── config.conf
 |   └── temp.conf
 └── scripts/
-    ├── ..
-    ├── ..
-    ├── ..
-    └── ..
+    ├── create_ec2.sh
+    ├── create_ig.sh
+    ├── create_s3.sh
+    ├── create_sg.sh
+    ├── create_subnets.sh
+    ├── create_vpc_endpoint.sh
+    ├── create_vpc_peering.sh
+    ├── create_vpc.sh
+    ├── destroy_all.sh
+    ├── execute_all.sh
+    └── main.sh
 ```
 
 ## Script Steps:
