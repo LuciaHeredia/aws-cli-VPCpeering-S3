@@ -17,8 +17,7 @@ echo "VPC_PEER_CON_ID=$VPC_PEER_CON_ID" >> $TEMP_VARS
 echo "--> Created peering connection: $VPC_PEER_CON_ID"
 #######
 echo "Accepting connection request..."
-aws ec2 accept-vpc-peering-connection \
-        --vpc-peering-connection-id $VPC_PEER_CON_ID
+aws ec2 accept-vpc-peering-connection --vpc-peering-connection-id $VPC_PEER_CON_ID
 #######
 echo "Waiting for VPC Peering Connection to become active..."
 COUNTER_SLEEP=5
