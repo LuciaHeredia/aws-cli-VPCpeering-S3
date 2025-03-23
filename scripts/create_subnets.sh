@@ -24,7 +24,9 @@ aws ec2 create-route \
     --gateway-id $IGW_ID --region $REGION
 echo "PUBLIC_ROUTE_TABLE_ID=$PUBLIC_ROUTE_TABLE_ID" >> $TEMP_VARS
 echo "--> Created and associated Public Route Table: $PUBLIC_ROUTE_TABLE_ID"
+
 #######
+
 echo "Creating Private Subnet..."
 PRIVATE_SUBNET_ID=$(aws ec2 create-subnet \
     --vpc-id $NEW_VPC_ID --region $REGION \
