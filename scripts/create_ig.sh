@@ -12,7 +12,7 @@ if [ -z "$IGW_ID" ]; then
     exit 1
 fi
 
-# Attach IG to new VPC
+# Attach Internet Gateway to new VPC
 aws ec2 attach-internet-gateway \
     --vpc-id $NEW_VPC_ID --region $REGION \
     --internet-gateway-id $IGW_ID
