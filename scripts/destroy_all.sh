@@ -61,5 +61,6 @@ if grep -q "S3_BUCKET_NAME" "$TEMP_VARS"; then
     aws s3api delete-bucket --bucket $S3_BUCKET_NAME --region $REGION
 fi
 ######################## Clear Temporary Variables File ########################
+# ATTENTION: all data (IDs) will be lost. #
 echo "Clearing Temporary Variables File..."
 > $TEMP_VARS
