@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# set permission to execute to all files bellow
 chmod +x scripts/main.sh
 chmod +x scripts/destroy_all.sh
 chmod +x scripts/create_vpc.sh
