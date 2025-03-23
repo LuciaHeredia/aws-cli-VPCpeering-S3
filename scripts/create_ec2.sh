@@ -47,11 +47,11 @@ echo "Instances successfully launched!"
 #######
 # Display SSH connection command
 echo "To SSH into the Public EC2 Instance, use:"
-echo "ssh -i $EC2_KEY_PAIR_NAME.pem ec2-user@$PUBLIC_IP"
+echo "ssh -i <EC2_KEY_PAIR_NAME>.pem ec2-user@<PUBLIC_IP>"
 
 echo "Once connected to the Public EC2, SSH into the Private EC2 using:"
-echo "ssh -i $EC2_KEY_PAIR_NAME.pem ec2-user@$PRIVATE_IP"
+echo "ssh -i <EC2_KEY_PAIR_NAME>.pem ec2-user@<PRIVATE_IP>"
 
 echo "For Verification:"
 echo "Run 'ifconfig' or 'ip' a on the private EC2 instance to verify the internal IP."
-echo "Try pinging the private EC2 from the public EC2: $ ping $PRIVATE_IP"
+echo "Try pinging the private EC2 from the public EC2: $ ping <PRIVATE_IP>"

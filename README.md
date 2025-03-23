@@ -56,10 +56,36 @@ give permission to all files to execute:  ``` $ chmod +x scripts/execute_all.sh 
 6. Launch **EC2 Instances**:
     - Launch an **EC2 instance** in the **public subnet** (acting as a **bastion host**).
     - Launch another **EC2 instance** in the **private subnet** (no public IP).
-    - Try to *SSH* from the public **EC2 instance** to the private **EC2 instance** using the *public IP* or *DNS*.
+    > Test: *SSH* from the public **EC2 instance** to the private **EC2 instance** using the *public IP* or *DNS*.
 7. Create an **S3 Bucket**.
 8. Create a **VPC Endpoint**:
     - Create a **VPC endpoint** for **S3** in the **private subnet**.
     - Update the **route table** for the **private subnet** to route **S3** traffic through the **VPC endpoint**.
-9. TODO: Upload File to **S3**:
-    - From the EC2 instance in the private subnet, use the AWS CLI to attempt to upload a file to the S3 bucket.
+
+## Test: Upload a file
+Upload a file to **S3** from private **EC2 Instance** in the **private subnet** using a **Bastion Host** (public **EC2 instance**):
+- *SSH* into the **Bastion Host** (public **EC2 instance**):
+    ``` 
+    $ ssh -i <EC2_KEY_PAIR_NAME>.pem ec2-user@<PUBLIC_IP> 
+    ```
+- *SSH* from the **Bastion Host** to the private **EC2 instance**:
+    ``` 
+    $ ssh -i <EC2_KEY_PAIR_NAME>.pem ec2-user@<PRIVATE_IP> 
+    ```
+- Create a Test File on the Private EC2:
+    ``` 
+    $ echo "This is a test file" > test-file.txt 
+    ```
+- Upload a file to the S3 bucket:
+    ``` 
+    $ aws s3 cp test-file.txt s3://<S3_BUCKET_NAME>/ 
+    ```
+- Verify the File in S3:
+    ``` 
+    $ aws s3 ls s3://<S3_BUCKET_NAME>/ 
+    ```
+- Exit SSH Sessions:
+    ```
+    $ exit 
+    $ exit 
+    ```

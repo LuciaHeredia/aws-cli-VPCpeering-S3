@@ -18,16 +18,13 @@ fi
 echo "VPC_ENDPOINT_ID=$VPC_ENDPOINT_ID" >> $TEMP_VARS
 echo "--> VPC Endpoint Created: $VPC_ENDPOINT_ID"
 
-<< COMMENT
-# Retrieve PrefixListId of the Amazon S3 managed prefix list in the region
-PREFIX_LIST_ID=$(aws ec2 describe-managed-prefix-lists \
-        --query "PrefixLists[?PrefixListName=='com.amazonaws.$REGION.s3'].PrefixListId" --output text)
-
-# Update the route table of Private Subnet to route S3 traffic through the VPC endpoint
-aws ec2 create-route \
+# Verify if the route for S3 traffic was created
+if aws ec2 describe-route-tables \
     --route-table-id $PRIVATE_ROUTE_TABLE_ID \
-    --destination-prefix-list-id $PREFIX_LIST_ID \
-    --vpc-endpoint-id $VPC_ENDPOINT_ID
-echo "--> Private Subnet Route Table Updated for S3 Traffic"
-COMMENT
-
+    --query "RouteTables[*].Routes[?GatewayId=='$VPC_ENDPOINT_ID']" --output text \
+    | grep -q "$VPC_ENDPOINT_ID"; then
+    echo "--> Route for S3 traffic through VPC Endpoint $VPC_ENDPOINT_ID exists."
+else
+    echo "--> Error: Route for S3 traffic not found in route table." >&2
+    exit 1
+fi

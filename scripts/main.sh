@@ -27,10 +27,7 @@ if ! grep -q "S3_BUCKET_NAME" "$TEMP_VARS"; then
 fi
 ######################## 8. VPC Endpoint ########################
 if ! grep -q "VPC_ENDPOINT_ID" "$TEMP_VARS"; then
-    scripts/create_vpc_endpoint.sh
+    ./scripts/create_vpc_endpoint.sh
 fi
-######################## 9. Upload to S3 ########################
-
-
 #######
 echo "--> Deployment complete!"
