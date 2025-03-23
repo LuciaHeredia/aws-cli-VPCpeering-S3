@@ -44,7 +44,7 @@ PRIVATE_IP=$(aws ec2 describe-instances \
 echo "--> Private EC2 Instance Private IP: $PRIVATE_IP"
 #######
 echo "Instances successfully launched!"
-#######
+
 # Display SSH connection command
 echo "To SSH into the Public EC2 Instance, use:"
 echo "ssh -i <EC2_KEY_PAIR_NAME>.pem ec2-user@<PUBLIC_IP>"
