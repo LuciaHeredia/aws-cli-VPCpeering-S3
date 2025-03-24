@@ -1,6 +1,8 @@
 #!/bin/bash
+source config/config.conf # Private Variables file
 
-# set permission to execute to all files bellow
+# set execute permission to files
+chmod 400 config/$EC2_KEY_PAIR_NAME.pem 
 chmod +x scripts/main.sh
 chmod +x scripts/destroy_all.sh
 chmod +x scripts/create_vpc.sh
