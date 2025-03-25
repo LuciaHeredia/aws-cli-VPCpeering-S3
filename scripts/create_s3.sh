@@ -5,6 +5,7 @@ source config/config.conf # Private Variables file
 RANDOM_STR=$(head /dev/urandom | tr -dc 'a-z0-9' | head -c 10)
 S3_BUCKET_NAME="s3-$RANDOM_STR"
 
+###################################################
 
 echo "Creating S3 bucket..."
 aws s3api create-bucket \

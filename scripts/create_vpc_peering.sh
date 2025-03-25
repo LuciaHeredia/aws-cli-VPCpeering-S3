@@ -2,6 +2,11 @@
 source config/config.conf # Private Variables file
 source "$TEMP_VARS" # Temporary Variables file (IDs)
 
+# Variables
+DEFAULT_VPC_CIDR_BLOCK=172.31.0.0/16 # AWS default
+
+###################################################
+
 echo "Creating VPC peering connection..."
 VPC_PEER_CON_ID=$(aws ec2 create-vpc-peering-connection \
         --vpc-id $NEW_VPC_ID --peer-vpc-id $DEFAULT_VPC_ID \

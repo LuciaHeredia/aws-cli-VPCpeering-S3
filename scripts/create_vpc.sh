@@ -5,7 +5,7 @@ echo "Creating VPC..."
 NEW_VPC_ID=$(aws ec2 create-vpc \
         --cidr-block $NEW_VPC_CIDR_BLOCK \
         --region $REGION \
-        --tag-specifications "ResourceType=vpc,Tags=[{Key=Name,Value=$NEW_VPC_NAME}]" \
+        --tag-specifications "ResourceType=vpc,Tags=[{Key=Name,Value="new-VPC"}]" \
         --query 'Vpc.VpcId' --output text)
 
 if [ -z "$NEW_VPC_ID" ]; then
