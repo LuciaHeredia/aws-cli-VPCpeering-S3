@@ -66,37 +66,41 @@ give permission to all files to execute:  ``` $ chmod +x scripts/execute_all.sh 
 Upload a file to **S3** from private **EC2 Instance** in the **private subnet** using a **Bastion Host** (public **EC2 instance**):
 - Copy the private key (.pem file) to the **Bastion Host**:
     ``` 
-    $ scp -i config/<EC2_KEY_PAIR_NAME>.pem config/<EC2_KEY_PAIR_NAME>.pem ubuntu@<PUBLIC_IP>:~/ 
+    $ scp -i config/<EC2_KEY_PAIR_NAME>.pem config/<EC2_KEY_PAIR_NAME>.pem ec2-user@<PUBLIC_IP>:~/
     ```
 - *SSH* into the **Bastion Host** (public **EC2 instance**):
     ``` 
-    $ ssh -i config/<EC2_KEY_PAIR_NAME>.pem ubuntu@<PUBLIC_IP> 
+    $ ssh -i config/<EC2_KEY_PAIR_NAME>.pem ec2-user@<PUBLIC_IP>
     ```
     #### Inside **Bastion Host**:
     - Set key permissions on the **Bastion Host**:
         ``` 
-        $ chmod 400 <EC2_KEY_PAIR_NAME>.pem 
+        $ chmod 400 <EC2_KEY_PAIR_NAME>.pem
         ```
     - *SSH* from the **Bastion Host** to the private **EC2 instance**:
         ``` 
-        $ ssh -i <EC2_KEY_PAIR_NAME>.pem ubuntu@<PRIVATE_IP> 
+        $ ssh -i <EC2_KEY_PAIR_NAME>.pem ec2-user@<PRIVATE_IP>
         ```
         #### Inside private **EC2 instance**:
-
+        - Configure AWS Credentials:
+            ``` 
+            $ aws configure
+            ```
         - Create a Test File:
             ``` 
-            $ echo "This is a test file" > test-file.txt 
+            $ echo "This is a test file" > test-file.txt
             ```
         - Upload a file to the **S3 bucket**:
             ``` 
-            $ aws s3 cp test-file.txt s3://<S3_BUCKET_NAME>/ 
+            $ aws s3 cp test-file.txt s3://<S3_BUCKET_NAME>/
             ```
         - Verify the File is in **S3**:
             ``` 
             $ aws s3 ls s3://<S3_BUCKET_NAME>/ 
             ```
-        - Exit *SSH* Sessions:
+        - Exit *SSH* Sessions (private **EC2 instance** and **Bastion Host**):
             ```
             $ exit 
             $ exit 
             ```
+            
