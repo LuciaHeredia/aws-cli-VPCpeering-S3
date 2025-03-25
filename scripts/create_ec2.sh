@@ -2,6 +2,12 @@
 source config/config.conf # Private Variables file
 source "$TEMP_VARS" # Temporary Variables file (IDs)
 
+# Variables
+AMI_ID="ami-0d0f28110d16ee7d6"  # Amazon Linux 2023 AMI with AWSCLI
+INSTANCE_TYPE="t2.micro"
+
+###################################################
+
 echo "Launching Public EC2..."
 PUBLIC_INSTANCE_ID=$(aws ec2 run-instances \
     --image-id $AMI_ID --region $REGION \
@@ -30,7 +36,6 @@ PRIVATE_INSTANCE_ID=$(aws ec2 run-instances \
     --key-name $EC2_KEY_PAIR_NAME \
     --subnet-id $PRIVATE_SUBNET_ID \
     --security-group-ids $PRIVATE_SG_ID \
-    --user-data file://"userdata/private_EC2.sh" \
     --query 'Instances[0].InstanceId' --output text)
 echo "PRIVATE_INSTANCE_ID=$PRIVATE_INSTANCE_ID" >> $TEMP_VARS
 echo "--> Launched Private EC2: $PRIVATE_INSTANCE_ID"
@@ -48,10 +53,10 @@ echo "Instances successfully launched!"
 
 # Display SSH connection command
 echo "To SSH into the Public EC2 Instance, use:"
-echo "ssh -i <EC2_KEY_PAIR_NAME>.pem ubuntu@<PUBLIC_IP>"
+echo "ssh -i config/<EC2_KEY_PAIR_NAME>.pem ec2-user@<PUBLIC_IP>"
 
 echo "Once connected to the Public EC2, SSH into the Private EC2 using:"
-echo "ssh -i <EC2_KEY_PAIR_NAME>.pem ubuntu@<PRIVATE_IP>"
+echo "ssh -i config/<EC2_KEY_PAIR_NAME>.pem ec2-user@<PRIVATE_IP>"
 
 echo "For Verification:"
 echo "Run 'ifconfig' or 'ip' a on the private EC2 instance to verify the internal IP."
